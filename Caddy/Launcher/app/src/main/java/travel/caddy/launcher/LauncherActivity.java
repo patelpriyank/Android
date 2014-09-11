@@ -105,8 +105,11 @@ public class LauncherActivity extends Activity {
         buttonViator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("http://www.partner.viator.com/en/14474");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                Uri uri = Uri.parse(Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
+                //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(Helper.KEY_WEBVIEW_OPEN_URL, Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
                 startActivity(intent);
             }
         });

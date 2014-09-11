@@ -21,7 +21,7 @@ public class WebViewActivity extends Activity {
 
         //extract data
         Bundle extras = getIntent().getExtras();
-        String url = extras.getString(Helper.WEBVIEW_OPEN_URL);
+        String url = extras.getString(Helper.KEY_WEBVIEW_OPEN_URL);
 
         startWebView(url);
     }
@@ -43,7 +43,7 @@ public class WebViewActivity extends Activity {
                 view.loadUrl(url);
                 return true;
             }
-
+/*
             //Show loader on url load
             public void onLoadResource (WebView view, String url) {
                 if (progressDialog == null) {
@@ -62,7 +62,7 @@ public class WebViewActivity extends Activity {
                 }catch(Exception exception){
                     exception.printStackTrace();
                 }
-            }
+            }*/
 
         });
 
