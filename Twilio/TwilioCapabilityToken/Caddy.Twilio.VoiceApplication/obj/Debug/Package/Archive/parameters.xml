@@ -1,0 +1,9 @@
+﻿<parameters>
+  <parameter name="IIS Web Application Name" defaultValue="Default Web Site/Caddy.Twilio.VoiceApplication_deploy" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Personal\\Android\\Twilio\\TwilioCapabilityToken\\Caddy\.Twilio\.VoiceApplication\\obj\\Debug\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Personal\\Android\\Twilio\\TwilioCapabilityToken\\Caddy\.Twilio\.VoiceApplication\\obj\\Debug\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-Caddy.Twilio.VoiceApplication-20140720120713.mdf;Initial Catalog=aspnet-Caddy.Twilio.VoiceApplication-20140720120713;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Personal\\Android\\Twilio\\TwilioCapabilityToken\\Caddy\.Twilio\.VoiceApplication\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>
