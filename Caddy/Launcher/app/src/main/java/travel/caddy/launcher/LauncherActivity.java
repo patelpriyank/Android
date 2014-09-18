@@ -55,9 +55,10 @@ public class LauncherActivity extends Activity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Guide not found!", Toast.LENGTH_LONG);
                     toast.show();
                 }
-                else
-                    startActivity( intent );
-
+                else {
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                }
             }
         });
 
@@ -74,8 +75,10 @@ public class LauncherActivity extends Activity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Guide not found!", Toast.LENGTH_LONG);
                     toast.show();
                 }
-                else
-                    startActivity( intent );
+                else {
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                }
 
             }
         });
@@ -93,8 +96,10 @@ public class LauncherActivity extends Activity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Guide not found!", Toast.LENGTH_LONG);
                     toast.show();
                 }
-                else
-                    startActivity( intent );
+                else {
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                }
 
             }
         });
@@ -111,6 +116,7 @@ public class LauncherActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                 intent.putExtra(Helper.KEY_WEBVIEW_OPEN_URL, Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
     }
