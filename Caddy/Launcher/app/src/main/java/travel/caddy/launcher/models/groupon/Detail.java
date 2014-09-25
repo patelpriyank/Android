@@ -1,5 +1,5 @@
 
-package travel.caddy.launcher.models;
+package travel.caddy.launcher.models.groupon;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -16,49 +16,23 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
 @JsonPropertyOrder({
-    "name",
-    "enabled",
-    "value"
+    "description"
 })
-public class DisplayOption {
+public class Detail {
 
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("enabled")
-    private Boolean enabled;
-    @JsonProperty("value")
-    private String value;
+    @JsonProperty("description")
+    private String description;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("description")
+    public String getDescription() {
+        return description;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonProperty("enabled")
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    @JsonProperty("enabled")
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    @JsonProperty("value")
-    public String getValue() {
-        return value;
-    }
-
-    @JsonProperty("value")
-    public void setValue(String value) {
-        this.value = value;
+    @JsonProperty("description")
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @JsonAnyGetter

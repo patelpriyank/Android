@@ -1,5 +1,5 @@
 
-package travel.caddy.launcher.models;
+package travel.caddy.launcher.models.groupon;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -20,7 +20,7 @@ import java.util.Map;
     "amount",
     "currencyCode"
 })
-public class Price {
+public class Value {
 
     @JsonProperty("formattedAmount")
     private String formattedAmount;

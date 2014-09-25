@@ -1,14 +1,13 @@
 package travel.caddy.launcher;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
+import android.app.Fragment;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
 
 public class LauncherActivity extends Activity {
@@ -16,16 +15,19 @@ public class LauncherActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_launcher);
-
-        _initButtons();
+        setContentView(R.layout.activity_main);
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, new PlaceholderFragment())
+                    .commit();
+        }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.launcher, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -41,83 +43,19 @@ public class LauncherActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void _initButtons()
-    {
-        final Button button = (Button) findViewById(R.id.buttonCatalog);
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class PlaceholderFragment extends Fragment {
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        public PlaceholderFragment() {
+        }
 
-                Intent intent = getPackageManager().getLaunchIntentForPackage("com.tripadvisor.android.apps.cityguide.catalog");
-                if(intent == null)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Guide not found!", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                else {
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                }
-            }
-        });
-
-        //Philadelphia
-        final Button buttonPhilly = (Button) findViewById(R.id.buttonPhiladelphia);
-
-        buttonPhilly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = getPackageManager().getLaunchIntentForPackage("com.tripadvisor.android.apps.cityguide.philadelphia");
-                if(intent == null)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Guide not found!", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                else {
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                }
-
-            }
-        });
-
-        //nyc
-        final Button buttonNYC = (Button) findViewById(R.id.buttonNYC);
-
-        buttonNYC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = getPackageManager().getLaunchIntentForPackage("com.tripadvisor.android.apps.cityguide.newyork");
-                if(intent == null)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Guide not found!", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                else {
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                }
-
-            }
-        });
-
-        //Kalamazoo
-        final Button buttonViator = (Button) findViewById(R.id.buttonViator);
-
-        buttonViator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
-                //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-
-                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
-                intent.putExtra(Helper.KEY_WEBVIEW_OPEN_URL, Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-            }
-        });
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_launcher, container, false);
+            return rootView;
+        }
     }
 }

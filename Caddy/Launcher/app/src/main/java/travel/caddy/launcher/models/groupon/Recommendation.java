@@ -1,11 +1,10 @@
 
-package travel.caddy.launcher.models;
+package travel.caddy.launcher.models.groupon;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.HashMap;
@@ -16,24 +15,12 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
 @JsonPropertyOrder({
-    "description"
-})
-public class Detail {
 
-    @JsonProperty("description")
-    private String description;
+})
+public class Recommendation {
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonProperty("description")
-    public String getDescription() {
-        return description;
-    }
-
-    @JsonProperty("description")
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
