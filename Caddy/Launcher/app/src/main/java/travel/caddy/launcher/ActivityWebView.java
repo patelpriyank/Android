@@ -10,7 +10,7 @@ import android.webkit.WebViewClient;
 
 import travel.caddy.launcher.Helpers.Helper;
 
-public class WebViewActivity extends Activity {
+public class ActivityWebView extends Activity {
 
     private WebView webView;
 
@@ -48,7 +48,7 @@ public class WebViewActivity extends Activity {
             public void onLoadResource (WebView view, String url) {
                 if (progressDialog == null) {
                     // in standard case YourActivity.this
-                    progressDialog = new ProgressDialog(WebViewActivity.this);
+                    progressDialog = new ProgressDialog(ActivityWebView.this);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
                 }

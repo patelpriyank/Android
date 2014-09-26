@@ -115,7 +115,7 @@ public class Proto_LauncherActivity extends Activity {
                 Uri uri = Uri.parse(Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
                 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
-                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityWebView.class);
                 intent.putExtra(Helper.KEY_WEBVIEW_OPEN_URL, Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
