@@ -1,4 +1,4 @@
-package travel.caddy.launcher;
+package travel.caddy.launcher.Helpers;
 
 /**
  * Created by PrPatel on 9/10/2014.

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class LauncherActivity extends Activity {
+public class ActivityLauncher extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

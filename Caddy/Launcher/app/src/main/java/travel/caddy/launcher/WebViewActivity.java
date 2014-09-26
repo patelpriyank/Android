@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import travel.caddy.launcher.R;
+import travel.caddy.launcher.Helpers.Helper;
 
 public class WebViewActivity extends Activity {
 

@@ -1,4 +1,4 @@
-package travel.caddy.launcher;
+package travel.caddy.launcher.fragments;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -8,18 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import travel.caddy.launcher.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LauncherFragment.OnFragmentInteractionListener} interface
+ * {@link FragmentLauncher.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link LauncherFragment#newInstance} factory method to
+ * Use the {@link FragmentLauncher#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class LauncherFragment extends Fragment {
+public class FragmentLauncher extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,15 +41,15 @@ public class LauncherFragment extends Fragment {
      * @return A new instance of fragment LauncherFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LauncherFragment newInstance(String param1, String param2) {
-        LauncherFragment fragment = new LauncherFragment();
+    public static FragmentLauncher newInstance(String param1, String param2) {
+        FragmentLauncher fragment = new FragmentLauncher();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    public LauncherFragment() {
+    public FragmentLauncher() {
         // Required empty public constructor
     }
 

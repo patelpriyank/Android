@@ -37,6 +37,7 @@ android {
 */
             res.srcDirs =
                     [
+                            '/src/main/res/layout/fragments',
                             '/src/main/res/layout/partialviews',
                             '/src/main/res/layout',
                             '/src/main/res'
