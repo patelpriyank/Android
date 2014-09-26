@@ -24,6 +24,9 @@ import travel.caddy.launcher.R;
  *
  */
 public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final int LOADER_ID_FOR_LAUNCHER_GRID_DATA = 0;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -97,6 +100,24 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
         mListener = null;
     }
 
+    //region "Data Loading through Loaders"
+
+    /*
+    Called when the fragment's activity has been created and this fragment's view hierarchy instantiated.
+    It can be used to do final initialization once these pieces are in place, such as retrieving views or restoring state.
+    It is also useful for fragments that use setRetainInstance(boolean) to retain their instance,
+    as this callback tells the fragment when it is fully associated with the new activity instance.
+    This is called after onCreateView(LayoutInflater, ViewGroup, Bundle) and before onViewStateRestored(Bundle).
+    * */
+    @Override
+    public void onActivityCreated (Bundle savedInstanceState){
+        // Prepare the loader.  Either re-connect with an existing one,
+        // or start a new one.
+        getLoaderManager().initLoader(LOADER_ID_FOR_LAUNCHER_GRID_DATA, null, this);
+    }
+
+    //endregion
+
     //region <LoaderCallbacks> interface implementations
 
     @Override
@@ -115,23 +136,7 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
     }
     //endregion
 
-    //region "Data Loading through Loaders"
 
-    /*
-    Called when the fragment's activity has been created and this fragment's view hierarchy instantiated.
-    It can be used to do final initialization once these pieces are in place, such as retrieving views or restoring state.
-    It is also useful for fragments that use setRetainInstance(boolean) to retain their instance,
-    as this callback tells the fragment when it is fully associated with the new activity instance.
-    This is called after onCreateView(LayoutInflater, ViewGroup, Bundle) and before onViewStateRestored(Bundle).
-    * */
-    @Override
-    public void onActivityCreated (Bundle savedInstanceState){
-        // Prepare the loader.  Either re-connect with an existing one,
-        // or start a new one.
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    //endregion
 
 
 
