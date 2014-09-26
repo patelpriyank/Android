@@ -1,6 +1,9 @@
 package travel.caddy.launcher.fragments;
 
 import android.app.Activity;
+import android.app.LoaderManager;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -20,7 +23,7 @@ import travel.caddy.launcher.R;
  * create an instance of this fragment.
  *
  */
-public class FragmentLauncher extends Fragment {
+public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,6 +72,7 @@ public class FragmentLauncher extends Fragment {
         return inflater.inflate(R.layout.fragment_launcher, container, false);
     }
 
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -92,6 +96,45 @@ public class FragmentLauncher extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    //region <LoaderCallbacks> interface implementations
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+
+    }
+    //endregion
+
+    //region "Data Loading through Loaders"
+
+    /*
+    Called when the fragment's activity has been created and this fragment's view hierarchy instantiated.
+    It can be used to do final initialization once these pieces are in place, such as retrieving views or restoring state.
+    It is also useful for fragments that use setRetainInstance(boolean) to retain their instance,
+    as this callback tells the fragment when it is fully associated with the new activity instance.
+    This is called after onCreateView(LayoutInflater, ViewGroup, Bundle) and before onViewStateRestored(Bundle).
+    * */
+    @Override
+    public void onActivityCreated (Bundle savedInstanceState){
+        // Prepare the loader.  Either re-connect with an existing one,
+        // or start a new one.
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    //endregion
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this
