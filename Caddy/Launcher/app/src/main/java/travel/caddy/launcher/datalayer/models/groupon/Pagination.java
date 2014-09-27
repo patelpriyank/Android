@@ -1,5 +1,5 @@
 
-package travel.caddy.launcher.models.groupon;
+package travel.caddy.launcher.datalayer.models.groupon;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -16,23 +16,36 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
 @JsonPropertyOrder({
-    "description"
+    "offset",
+    "count"
 })
-public class Detail {
+public class Pagination {
 
-    @JsonProperty("description")
-    private String description;
+    @JsonProperty("offset")
+    private Integer offset;
+    @JsonProperty("count")
+    private Integer count;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("description")
-    public String getDescription() {
-        return description;
+    @JsonProperty("offset")
+    public Integer getOffset() {
+        return offset;
     }
 
-    @JsonProperty("description")
-    public void setDescription(String description) {
-        this.description = description;
+    @JsonProperty("offset")
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    @JsonProperty("count")
+    public Integer getCount() {
+        return count;
+    }
+
+    @JsonProperty("count")
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     @JsonAnyGetter

@@ -1,5 +1,5 @@
 
-package travel.caddy.launcher.models.groupon;
+package travel.caddy.launcher.datalayer.models.groupon;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;

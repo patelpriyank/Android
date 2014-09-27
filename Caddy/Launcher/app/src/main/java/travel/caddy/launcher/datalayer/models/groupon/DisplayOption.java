@@ -1,5 +1,5 @@
 
-package travel.caddy.launcher.models.groupon;
+package travel.caddy.launcher.datalayer.models.groupon;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -16,49 +16,49 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
 @JsonPropertyOrder({
-    "headline",
-    "line2",
-    "line1"
+    "name",
+    "enabled",
+    "value"
 })
-public class TextAd {
+public class DisplayOption {
 
-    @JsonProperty("headline")
-    private String headline;
-    @JsonProperty("line2")
-    private String line2;
-    @JsonProperty("line1")
-    private String line1;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("enabled")
+    private Boolean enabled;
+    @JsonProperty("value")
+    private String value;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("headline")
-    public String getHeadline() {
-        return headline;
+    @JsonProperty("name")
+    public String getName() {
+        return name;
     }
 
-    @JsonProperty("headline")
-    public void setHeadline(String headline) {
-        this.headline = headline;
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @JsonProperty("line2")
-    public String getLine2() {
-        return line2;
+    @JsonProperty("enabled")
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    @JsonProperty("line2")
-    public void setLine2(String line2) {
-        this.line2 = line2;
+    @JsonProperty("enabled")
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
-    @JsonProperty("line1")
-    public String getLine1() {
-        return line1;
+    @JsonProperty("value")
+    public String getValue() {
+        return value;
     }
 
-    @JsonProperty("line1")
-    public void setLine1(String line1) {
-        this.line1 = line1;
+    @JsonProperty("value")
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @JsonAnyGetter
