@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import travel.caddy.launcher.Helpers.Helper;
+import travel.caddy.launcher.Helpers.Settings;
 
 
 public class Proto_LauncherActivity extends Activity {
@@ -112,11 +112,11 @@ public class Proto_LauncherActivity extends Activity {
         buttonViator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse(Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
+                Uri uri = Uri.parse(Settings.TOURS_N_PACKAGES_WEBVIEW_URL);
                 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
                 Intent intent = new Intent(getApplicationContext(), ActivityWebView.class);
-                intent.putExtra(Helper.KEY_WEBVIEW_OPEN_URL, Helper.TOURS_N_PACKAGES_WEBVIEW_URL);
+                intent.putExtra(Settings.KEY_WEBVIEW_OPEN_URL, Settings.TOURS_N_PACKAGES_WEBVIEW_URL);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }

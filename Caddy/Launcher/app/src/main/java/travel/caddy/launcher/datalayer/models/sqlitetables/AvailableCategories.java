@@ -1,9 +1,9 @@
-package travel.caddy.launcher.datalayer.models.app;
+package travel.caddy.launcher.datalayer.models.sqlitetables;
 
 /**
  * Created by PrPatel on 9/27/2014.
  */
-public class AvailableCategory {
+public class AvailableCategories {
 
     public static final String TABLE_NAME = "AvailableCategories";
     public static final String COLUMN_ID = "_id";

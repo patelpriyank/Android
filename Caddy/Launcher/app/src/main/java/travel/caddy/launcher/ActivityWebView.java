@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import travel.caddy.launcher.Helpers.Helper;
+import travel.caddy.launcher.Helpers.Settings;
 
 public class ActivityWebView extends Activity {
 
@@ -21,7 +21,7 @@ public class ActivityWebView extends Activity {
 
         //extract data
         Bundle extras = getIntent().getExtras();
-        String url = extras.getString(Helper.KEY_WEBVIEW_OPEN_URL);
+        String url = extras.getString(Settings.KEY_WEBVIEW_OPEN_URL);
 
         startWebView(url);
     }
