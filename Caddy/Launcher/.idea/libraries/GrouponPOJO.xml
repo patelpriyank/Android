@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="GrouponPOJO">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/GrouponPOJO.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

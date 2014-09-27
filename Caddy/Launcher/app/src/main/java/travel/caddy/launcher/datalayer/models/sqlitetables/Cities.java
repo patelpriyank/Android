@@ -1,7 +1,10 @@
 package travel.caddy.launcher.datalayer.models.sqlitetables;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import org.w3c.dom.Comment;
 
 /**
  * Created by PrPatel on 9/27/2014.
@@ -44,4 +47,17 @@ public class Cities {
 
         return true;
     }
+
+    //region "Data processing"
+    private City cursorToCity(Cursor cursor) {
+        City city = new City();
+/*
+        comment.setId(cursor.getLong(0));
+        comment.setComment(cursor.getString(1));
+*/
+        return city;
+    }
+
+    //endregion
 }
+
