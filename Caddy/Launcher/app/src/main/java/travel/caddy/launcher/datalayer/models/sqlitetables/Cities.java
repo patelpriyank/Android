@@ -4,10 +4,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import org.w3c.dom.Comment;
-
-import java.util.List;
-
 /**
  * Created by PrPatel on 9/27/2014.
  */
@@ -15,9 +11,11 @@ public class Cities {
 
     public static final String TABLE_NAME = "cities";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_CITYID = "cityid";
     public static final String COLUMN_CITYNAME = "cityname";
-    public static final String COLUMN_NORMALIZEDNAME = "normalizedname";
+    public static final String COLUMN_NORMALIZEDCITYNAME = "normalizedcityname";
+    public static final String COLUMN_COUNTRY = "country";
+    public static final String COLUMN_NORMALIZEDCOUNTRY = "normalizedcountry";
+    public static final String COLUMN_CONTINENT = "continent";
     public static final String COLUMN_MINLAT = "minlat";
     public static final String COLUMN_MAXLAT = "maxlat";
     public static final String COLUMN_MINLON = "minlon";
@@ -29,9 +27,11 @@ public class Cities {
     {
         String createTable = "create table " + TABLE_NAME
                                     + "(" + COLUMN_ID + " INTEGER primary key autoincrement, "
-                                    + COLUMN_CITYID + " INTEGER not null, "
                                     + COLUMN_CITYNAME + " TEXT not null, "
-                                    + COLUMN_NORMALIZEDNAME + " TEXT not null, "
+                                    + COLUMN_NORMALIZEDCITYNAME + " TEXT not null, "
+                                    + COLUMN_COUNTRY + " TEXT not null, "
+                                    + COLUMN_NORMALIZEDCOUNTRY + " TEXT not null, "
+                                    + COLUMN_CONTINENT + " TEXT not null, "
                                     + COLUMN_MINLAT + " REAL not null, "
                                     + COLUMN_MAXLAT + " REAL not null, "
                                     + COLUMN_MINLON + " REAL not null, "

@@ -1,3 +1,7 @@
+/*
+* Gradle Project Structure:- http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure
+*/
+
 apply plugin: 'com.android.application'
 
 android {
