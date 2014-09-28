@@ -6,6 +6,8 @@ import android.util.Log;
 
 import org.w3c.dom.Comment;
 
+import java.util.List;
+
 /**
  * Created by PrPatel on 9/27/2014.
  */
@@ -20,6 +22,8 @@ public class Cities {
     public static final String COLUMN_MAXLAT = "maxlat";
     public static final String COLUMN_MINLON = "minlon";
     public static final String COLUMN_MAXLON = "maxlon";
+
+    //region "DB initialization"
 
     public static boolean onCreate(SQLiteDatabase database)
     {
@@ -48,13 +52,40 @@ public class Cities {
         return true;
     }
 
-    //region "Data processing"
-    private City cursorToCity(Cursor cursor) {
+    //endregion
+
+    //region "DAO methods"
+
+    public Cursor GetCities(SQLiteDatabase sqLiteDatabase, String[] columns, String whereClause)
+    {
+        /*
+        String[] columnNames	A list of which table columns to return. Passing "null" will return all columns.
+        */
+        //pass actual list of columns, otherwise pass null to return all the columns
+        String[] outputColumns = null;
+        if(columns != null && !(columns.length == 0)) {
+            outputColumns = columns;
+        }
+
+        //query(java.lang.String table, java.lang.String[] columns, java.lang.String selection, java.lang.String[] selectionArgs, java.lang.String groupBy, java.lang.String having, java.lang.String orderBy)
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, outputColumns, whereClause, null, null, null, null);
+
+        return cursor;
+    }
+
+    public City ToCity(Cursor cursor) {
+
         City city = new City();
-/*
-        comment.setId(cursor.getLong(0));
-        comment.setComment(cursor.getString(1));
-*/
+
+        city._ID = cursor.getInt(0);
+        city.CityId = cursor.getInt(1);
+        city.CityName = cursor.getString(2);
+        city.NormalizedName = cursor.getString(3);
+        city.MinLat = cursor.getLong(4);
+        city.MaxLat = cursor.getLong(5);
+        city.MinLon = cursor.getLong(6);
+        city.MaxLon = cursor.getLong(7);
+
         return city;
     }
 
