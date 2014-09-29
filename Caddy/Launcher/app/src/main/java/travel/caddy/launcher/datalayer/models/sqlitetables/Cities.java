@@ -18,6 +18,7 @@ public class Cities {
 
     public static final String TABLE_NAME = "cities";
     public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_CITYID = "cityid";
     public static final String COLUMN_CITYNAME = "cityname";
     public static final String COLUMN_NORMALIZEDCITYNAME = "normalizedcityname";
     public static final String COLUMN_COUNTRY = "country";
@@ -34,6 +35,7 @@ public class Cities {
     {
        /* String createTable = "create table " + TABLE_NAME
                                     + "(" + COLUMN_ID + " INTEGER primary key autoincrement, "
+                                    + COLUMN_CITYID + " INTEGER not null, "
                                     + COLUMN_CITYNAME + " TEXT not null, "
                                     + COLUMN_NORMALIZEDCITYNAME + " TEXT not null, "
                                     + COLUMN_COUNTRY + " TEXT not null, "
@@ -47,6 +49,30 @@ public class Cities {
         database.execSQL(createTable);*/
 
         try {
+
+            /* example
+            
+            CREATE TABLE numbers (
+               _id INTEGER PRIMARY KEY AUTOINCREMENT,
+               employid INTEGER NOT NULL,
+               number TEXT NOT NULL,
+               ntype INTEGER NOT NULL DEFAULT '0'
+            );
+            CREATE INDEX employid ON numbers(employid);
+
+            INSERT INTO numbers (employid, number, ntype) SELECT _id, ext, 0 FROM employees;
+            INSERT INTO numbers (employid, number, ntype) SELECT _id, mob, 1  FROM employees;
+
+            CREATE TABLE temp (
+                 _id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 name TEXT NOT NULL,
+                 salary INTEGER NOT NULL DEFAULT '0'
+            );
+            INSERT INTO temp (_id, name) SELECT _id, name FROM employees;
+
+            DROP TABLE employees;
+            ALTER TABLE temp RENAME TO employees;
+             */
 
             sqLiteOpenHelper.ExecSQLFile(database, "cities_create_table.sql");
             sqLiteOpenHelper.ExecSQLFile(database, "cities_insert_table.sql");
@@ -109,11 +135,14 @@ public class Cities {
         city._ID = cursor.getInt(0);
         city.CityId = cursor.getInt(1);
         city.CityName = cursor.getString(2);
-        city.NormalizedName = cursor.getString(3);
-        city.MinLat = cursor.getLong(4);
-        city.MaxLat = cursor.getLong(5);
-        city.MinLon = cursor.getLong(6);
-        city.MaxLon = cursor.getLong(7);
+        city.NormalizedCityName = cursor.getString(3);
+        city.Country = cursor.getString(4);
+        city.NormalizedCountryName = cursor.getString(5);
+        city.Continent = cursor.getString(6);
+        city.MinLat = cursor.getLong(7);
+        city.MaxLat = cursor.getLong(8);
+        city.MinLon = cursor.getLong(9);
+        city.MaxLon = cursor.getLong(10);
 
         return city;
     }
