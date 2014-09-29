@@ -4,8 +4,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import travel.caddy.launcher.datalayer.CaddySQLiteOpenHelper;
 
 /**
  * Created by PrPatel on 9/27/2014.
@@ -26,7 +30,7 @@ public class Cities {
 
     //region "DB initialization"
 
-    public static boolean onCreate(SQLiteDatabase database)
+    public static boolean onCreate(CaddySQLiteOpenHelper sqLiteOpenHelper, SQLiteDatabase database)
     {
        /* String createTable = "create table " + TABLE_NAME
                                     + "(" + COLUMN_ID + " INTEGER primary key autoincrement, "
@@ -42,15 +46,27 @@ public class Cities {
 
         database.execSQL(createTable);*/
 
+        try {
+
+            sqLiteOpenHelper.ExecSqlFile(database, "cities_create_table.sql");
+            sqLiteOpenHelper.ExecSqlFile(database, "cities_insert_table.sql");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Cities table initialization failed", e);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Cities table initialization failed", e);
+        }
         return true;
     }
 
-    public static boolean onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion)
+    public static boolean onUpgrade(CaddySQLiteOpenHelper sqLiteOpenHelper, SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion)
     {
         Log.w(Cities.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
 
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(sqLiteDatabase);
+        onCreate(sqLiteOpenHelper, sqLiteDatabase);
 
         return true;
     }
