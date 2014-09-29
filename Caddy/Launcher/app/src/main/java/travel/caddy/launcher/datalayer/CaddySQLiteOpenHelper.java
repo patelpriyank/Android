@@ -50,7 +50,7 @@ public class CaddySQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     //region "Helper Methods"
-    public void ExecSqlFile(SQLiteDatabase sqLiteDatabase, String sqlFileName) throws SQLException, IOException {
+    public void ExecSQLFile(SQLiteDatabase sqLiteDatabase, String sqlFileName) throws SQLException, IOException {
         Log.i("  exec sql file: {}", sqlFileName);
         for( String sqlInstruction : SQLFileParser.ParseSqlFile(Settings.SQL_DIR + "/" + sqlFileName, _context.getAssets())) {
             Log.d("    sql: {}", sqlInstruction );

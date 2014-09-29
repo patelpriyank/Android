@@ -48,8 +48,8 @@ public class Cities {
 
         try {
 
-            sqLiteOpenHelper.ExecSqlFile(database, "cities_create_table.sql");
-            sqLiteOpenHelper.ExecSqlFile(database, "cities_insert_table.sql");
+            sqLiteOpenHelper.ExecSQLFile(database, "cities_create_table.sql");
+            sqLiteOpenHelper.ExecSQLFile(database, "cities_insert_table.sql");
 
         } catch (SQLException e) {
             e.printStackTrace();
