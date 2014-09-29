@@ -27,11 +27,11 @@ public class SQLFileParser {
     }
 
     public static List<String> ParseSqlFile(InputStream is) throws IOException {
-        String script = removeComments(is);
-        return splitSqlScript(script, ';');
+        String script = _removeComments(is);
+        return _splitSqlScript(script, ';');
     }
 
-    private static String removeComments(InputStream is) throws IOException {
+    private static String _removeComments(InputStream is) throws IOException {
 
         StringBuilder sql = new StringBuilder();
 
@@ -78,7 +78,7 @@ public class SQLFileParser {
         return sql.toString();
     }
 
-    private static List<String> splitSqlScript(String script, char delimiter) {
+    private static List<String> _splitSqlScript(String script, char delimiter) {
         List<String> statements = new ArrayList<String>();
         StringBuilder sb = new StringBuilder();
         boolean inLiteral = false;

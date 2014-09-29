@@ -11,6 +11,7 @@ public class Settings {
     //region "Data related"
 
     public static int DATABASE_VERSION = 1;
+    public static final String SQL_DIR = "dbscripts" ;
 
     //endregion
 }

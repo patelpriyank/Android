@@ -4,6 +4,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by PrPatel on 9/27/2014.
  */
@@ -25,7 +28,7 @@ public class Cities {
 
     public static boolean onCreate(SQLiteDatabase database)
     {
-        String createTable = "create table " + TABLE_NAME
+       /* String createTable = "create table " + TABLE_NAME
                                     + "(" + COLUMN_ID + " INTEGER primary key autoincrement, "
                                     + COLUMN_CITYNAME + " TEXT not null, "
                                     + COLUMN_NORMALIZEDCITYNAME + " TEXT not null, "
@@ -37,7 +40,7 @@ public class Cities {
                                     + COLUMN_MINLON + " REAL not null, "
                                     + COLUMN_MAXLON + " REAL not null);";
 
-        database.execSQL(createTable);
+        database.execSQL(createTable);*/
 
         return true;
     }
@@ -56,7 +59,7 @@ public class Cities {
 
     //region "DAO methods"
 
-    public Cursor GetCities(SQLiteDatabase sqLiteDatabase, String[] columns, String whereClause)
+    public List<City> GetCities(SQLiteDatabase sqLiteDatabase, String[] columns, String whereClause)
     {
         /*
         String[] columnNames	A list of which table columns to return. Passing "null" will return all columns.
@@ -70,7 +73,17 @@ public class Cities {
         //query(java.lang.String table, java.lang.String[] columns, java.lang.String selection, java.lang.String[] selectionArgs, java.lang.String groupBy, java.lang.String having, java.lang.String orderBy)
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, outputColumns, whereClause, null, null, null, null);
 
-        return cursor;
+        List<City> comments = new ArrayList<City>();
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            City city = ToCity(cursor);
+            comments.add(city);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return comments;
     }
 
     public City ToCity(Cursor cursor) {
