@@ -6,15 +6,14 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import travel.caddy.launcher.datalayer.CaddySQLiteOpenHelper;
+import travel.caddy.launcher.datalayer.CustomLoaders.IDataSource;
 
 /**
  * Created by PrPatel on 9/27/2014.
  */
-public class Cities {
+public class Cities implements IDataSource<City> {
 
     public static final String TABLE_NAME = "cities";
     public static final String COLUMN_ID = "_id";
@@ -28,6 +27,10 @@ public class Cities {
     public static final String COLUMN_MAXLAT = "maxlat";
     public static final String COLUMN_MINLON = "minlon";
     public static final String COLUMN_MAXLON = "maxlon";
+
+/*    public Cities(SQLiteDatabase database) {
+        super(database);
+    }*/
 
     //region "DB initialization"
 
@@ -51,7 +54,7 @@ public class Cities {
         try {
 
             /* example
-            
+
             CREATE TABLE numbers (
                _id INTEGER PRIMARY KEY AUTOINCREMENT,
                employid INTEGER NOT NULL,
@@ -101,11 +104,25 @@ public class Cities {
 
     //region "DAO methods"
 
-    public List<City> GetCities(SQLiteDatabase sqLiteDatabase, String[] columns, String whereClause)
+    @Override
+    public Cursor read(SQLiteDatabase sqLiteDatabase) {
+
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, null, null, null, null, null, null);
+        return cursor;
+    }
+
+    @Override
+    public Cursor read(SQLiteDatabase sqLiteDatabase, String[] columns, String whereClause, String[] selectionArgs, String groupBy, String having, String orderBy, String limit) {
+
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME, columns, whereClause, selectionArgs, groupBy, having, orderBy, limit);
+        return cursor;
+    }
+
+   /* public List<City> GetCities(SQLiteDatabase sqLiteDatabase, String[] columns, String whereClause)
     {
-        /*
+        *//*
         String[] columnNames	A list of which table columns to return. Passing "null" will return all columns.
-        */
+        *//*
         //pass actual list of columns, otherwise pass null to return all the columns
         String[] outputColumns = null;
         if(columns != null && !(columns.length == 0)) {
@@ -146,7 +163,7 @@ public class Cities {
 
         return city;
     }
-
+    */
     //endregion
 }
 
