@@ -1,10 +1,7 @@
-package travel.caddy.launcher.datalayer.CustomLoaders;
+package travel.caddy.launcher.datalayer.Loaders;
 
 import android.content.AsyncTaskLoader;
-import android.content.Context;
-import android.content.CursorLoader;
 import android.content.pm.PackageManager;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -44,7 +41,7 @@ public class SQLiteLoader extends AsyncTaskLoader<Cursor> {
         super(context);
     }*/
 
-    public SQLiteLoader(android.content.Context context, boolean distinct, String table, java.lang.String[] columns, java.lang.String whereClause, java.lang.String[] selectionArgs, java.lang.String groupBy, java.lang.String havingClause, java.lang.String sortOrder, String limit, CancellationSignal cancellationSignal)
+    public SQLiteLoader(android.content.Context context, boolean distinct, String table, java.lang.String[] columns, java.lang.String whereClause, java.lang.String[] selectionArgs, java.lang.String groupBy, java.lang.String havingClause, java.lang.String sortOrder, String limit)
     {
         super(context);
 

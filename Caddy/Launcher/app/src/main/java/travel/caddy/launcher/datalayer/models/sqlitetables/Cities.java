@@ -8,12 +8,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import travel.caddy.launcher.datalayer.CaddySQLiteOpenHelper;
-import travel.caddy.launcher.datalayer.CustomLoaders.IDataSource;
 
 /**
  * Created by PrPatel on 9/27/2014.
  */
-public class Cities implements IDataSource<City> {
+public class Cities {
 
     public static final String TABLE_NAME = "cities";
     public static final String COLUMN_ID = "_id";
@@ -103,7 +102,7 @@ public class Cities implements IDataSource<City> {
     //endregion
 
     //region "DAO methods"
-
+/*
     @Override
     public Cursor read(SQLiteDatabase sqLiteDatabase) {
 
@@ -116,7 +115,7 @@ public class Cities implements IDataSource<City> {
 
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME, columns, whereClause, selectionArgs, groupBy, having, orderBy, limit);
         return cursor;
-    }
+    }*/
 
    /* public List<City> GetCities(SQLiteDatabase sqLiteDatabase, String[] columns, String whereClause)
     {

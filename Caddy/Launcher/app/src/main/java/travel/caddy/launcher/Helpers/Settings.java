@@ -11,8 +11,17 @@ public class Settings {
     //region "Data related"
 
     public static final String DATABASE_NAME = "caddy.db";
-    //public static int DATABASE_VERSION = 1;
     public static final String SQL_DIR = "dbscripts" ;
+
+    public static final String KEY_TABLE = "TABLE";
+    public static final String KEY_DISTINCT = "DISTINCT";
+    public static final String KEY_COLUMNS = "COLUMNS";
+    public static final String KEY_WHERECLAUSE = "WHERECLAUSE";
+    public static final String KEY_WHERECLAUSEARGS = "WHERECLAUSEARGS";
+    public static final String KEY_HAVINGCLUASE = "HAVINGCLAUSE";
+    public static final String KEY_GROUPBY = "GROUPBY";
+    public static final String KEY_SORTORDER = "SORTORDER";
+    public static final String KEY_LIMIT = "LIMIT";
 
     //endregion
 }

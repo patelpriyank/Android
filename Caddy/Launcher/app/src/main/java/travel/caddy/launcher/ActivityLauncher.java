@@ -2,15 +2,19 @@ package travel.caddy.launcher;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import travel.caddy.launcher.fragments.FragmentLauncher;
 
 
-public class ActivityLauncher extends Activity {
+public class ActivityLauncher extends Activity implements FragmentLauncher.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +22,7 @@ public class ActivityLauncher extends Activity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new FragmentLauncher())
                     .commit();
         }
     }
@@ -43,19 +47,9 @@ public class ActivityLauncher extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_launcher, container, false);
-            return rootView;
-        }
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        Toast toast = Toast.makeText(this, "Wheeee!", Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

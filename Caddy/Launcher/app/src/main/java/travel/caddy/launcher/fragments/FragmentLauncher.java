@@ -3,6 +3,7 @@ package travel.caddy.launcher.fragments;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import travel.caddy.launcher.Helpers.Settings;
 import travel.caddy.launcher.R;
+import travel.caddy.launcher.datalayer.CaddySQLiteOpenHelper;
+import travel.caddy.launcher.datalayer.Loaders.SQLiteLoader;
+import travel.caddy.launcher.datalayer.models.sqlitetables.Cities;
 
 
 /**
@@ -27,34 +32,8 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
 
     private static final int LOADER_ID_FOR_LAUNCHER_GRID_DATA = 0;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LauncherFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentLauncher newInstance(String param1, String param2) {
-        FragmentLauncher fragment = new FragmentLauncher();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
     public FragmentLauncher() {
         // Required empty public constructor
     }
@@ -62,10 +41,6 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -113,7 +88,23 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
     public void onActivityCreated (Bundle savedInstanceState){
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
-        getLoaderManager().initLoader(LOADER_ID_FOR_LAUNCHER_GRID_DATA, null, this);
+        /*
+        Parameters
+            id	        A unique identifier for this loader. Can be whatever you want. Identifiers are scoped to a particular LoaderManager instance.
+            args	    Optional arguments to supply to the loader at construction. If a loader already exists (a new one does not need to be created), this parameter will be ignored and the last arguments continue to be used.
+            callback	Interface the LoaderManager will call to report about changes in the state of the loader. Required.
+        */
+        Bundle args = new Bundle();
+
+        args.putString(Settings.KEY_TABLE, Cities.TABLE_NAME);
+/*        args.putBoolean(Settings.KEY_DISTINCT, false);
+        args.putString(Settings.KEY_WHERECLAUSE,namevalue);
+        args.putString(Settings.KEY_SELECTIONARGS,namevalue);
+        args.putString(Settings.KEY_GROUPBY,namevalue);
+        args.putString(Settings.KEY_SORTORDER,namevalue);
+        args.putString(Settings.KEY_LIMIT,variablename);*/
+
+        getLoaderManager().initLoader(LOADER_ID_FOR_LAUNCHER_GRID_DATA, args, this);
     }
 
     //endregion
@@ -121,18 +112,36 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
     //region <LoaderCallbacks> interface implementations
 
     @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return null;
+    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
+
+        if (getArguments() != null) {
+            String tableName = getArguments().getString(Settings.KEY_TABLE);
+            boolean distinct = getArguments().getBoolean(Settings.KEY_DISTINCT);
+            String[] columns = getArguments().getStringArray(Settings.KEY_COLUMNS);
+            String whereClause = getArguments().getString(Settings.KEY_WHERECLAUSE);
+            String[] selectionArgs = getArguments().getStringArray(Settings.KEY_WHERECLAUSEARGS);
+            String groupBy = getArguments().getString(Settings.KEY_GROUPBY);
+            String havingClause = getArguments().getString(Settings.KEY_HAVINGCLUASE);
+            String sortOrder = getArguments().getString(Settings.KEY_SORTORDER);
+            String limit = getArguments().getString(Settings.KEY_LIMIT);
+
+            return new SQLiteLoader(getActivity(), distinct, tableName, columns, whereClause, selectionArgs, groupBy, havingClause, sortOrder, limit);
+        }
+
+        throw new RuntimeException("Missing arguments to SQLiteLoader in order to load data from database.");
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-
+        // Swap the new cursor in.  (The framework will take care of closing the
+        // old cursor once we return.)
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
+        // This is called when the last Cursor provided to onLoadFinished()
+        // above is about to be closed.  We need to make sure we are no
+        // longer using it.
     }
     //endregion
 
@@ -151,6 +160,14 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
+    /* Note by Priyank
+        Instead use Otto - and event bus with Pub-Sub model :- http://square.github.io/otto/
+        "To return data back to activity from fragment, activity has to implement fragment’s listener interface.
+        Activity class can get bigger and bulky as many fragments are added to the same activity. Then there is runtime type casting, tight-coupling etc.
+        Instead use Publisher - Bus - Subscriber (Bus architecture) where fragments, activities and Bus are loosely coupled through interfaces.
+        Single line of register and unregister call instead of using LocalBroadcastReceiver of android way."
+    */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
