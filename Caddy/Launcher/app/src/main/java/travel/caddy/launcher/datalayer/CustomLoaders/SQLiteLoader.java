@@ -21,6 +21,7 @@ import travel.caddy.launcher.datalayer.CaddySQLiteOpenHelper;
  */
 public class SQLiteLoader extends CursorLoader {
 
+    boolean _distinct;
     String _table;
     String[] _columns;
     String _whereClause;
@@ -30,7 +31,7 @@ public class SQLiteLoader extends CursorLoader {
     String _sortOrder;
     String _limit;
 
-    //CancellationSignal mCancellationSignal;
+    CancellationSignal mCancellationSignal;
 
     /**
      * Creates an empty unspecified CursorLoader.  You must follow this with
@@ -45,6 +46,7 @@ public class SQLiteLoader extends CursorLoader {
     {
         super(context);
 
+        _distinct = distinct;
         _table = table;
         _columns = columns;
         _whereClause = whereClause;
@@ -57,14 +59,12 @@ public class SQLiteLoader extends CursorLoader {
     /* Runs on a worker thread */
     @Override
     public Cursor loadInBackground() {
-/*
         synchronized (this) {
             if (isLoadInBackgroundCanceled()) {
                 throw new OperationCanceledException();
             }
             mCancellationSignal = new CancellationSignal();
         }
-*/
         try {
 
             CaddySQLiteOpenHelper dbHelper = new CaddySQLiteOpenHelper(getContext());
@@ -82,10 +82,7 @@ public class SQLiteLoader extends CursorLoader {
             */
             //public android.database.Cursor query(boolean distinct, java.lang.String table, java.lang.String[] columns, java.lang.String selection, java.lang.String[] selectionArgs, java.lang.String groupBy, java.lang.String having, java.lang.String orderBy, java.lang.String limit, android.os.CancellationSignal cancellationSignal) { /* compiled code */ }
 
-            Cursor cursor = database.query(_table, _columns, _whereClause, _selectionArgs, _groupBy, _havingClause, _sortOrder, _limit);
-
-            /*Cursor cursor = getContext().getContentResolver().query(mUri, mProjection, mSelection,
-                    mSelectionArgs, mSortOrder, mCancellationSignal);*/
+            Cursor cursor = database.query(_distinct, _table, _columns, _whereClause, _selectionArgs, _groupBy, _havingClause, _sortOrder, _limit, mCancellationSignal);
 
             if (cursor != null) {
                 try {
@@ -102,13 +99,12 @@ public class SQLiteLoader extends CursorLoader {
             e.printStackTrace();
             throw new RuntimeException("Error opening table " + _table, e);
         } finally {
-            /*synchronized (this) {
+            synchronized (this) {
                 mCancellationSignal = null;
-            }*/
+            }
         }
     }
 
-/*
     @Override
     public void cancelLoadInBackground() {
         super.cancelLoadInBackground();
@@ -119,6 +115,5 @@ public class SQLiteLoader extends CursorLoader {
             }
         }
     }
-*/
 
 }
