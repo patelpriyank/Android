@@ -11,9 +11,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import travel.caddy.launcher.Helpers.Settings;
 import travel.caddy.launcher.R;
+import travel.caddy.launcher.adapters.AdapterLauncherGrid;
 import travel.caddy.launcher.datalayer.CaddySQLiteOpenHelper;
 import travel.caddy.launcher.datalayer.Loaders.SQLiteLoader;
 import travel.caddy.launcher.datalayer.models.sqlitetables.Cities;
@@ -34,6 +36,9 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
 
     private OnFragmentInteractionListener mListener;
 
+    GridView _gridDeleteThis;
+    AdapterLauncherGrid _adapterLauncherGrid;
+
     public FragmentLauncher() {
         // Required empty public constructor
     }
@@ -41,6 +46,12 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Create an empty adapter we will use to display the loaded data.
+        _adapterLauncherGrid = new AdapterLauncherGrid(getActivity(), null, null);
+        _gridDeleteThis = (GridView)getView().findViewById(R.id.gridDeleteThis);
+        _gridDeleteThis.setAdapter(_adapterLauncherGrid);
+
     }
 
     @Override
@@ -86,6 +97,7 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
     * */
     @Override
     public void onActivityCreated (Bundle savedInstanceState){
+
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
         /*
@@ -114,16 +126,16 @@ public class FragmentLauncher extends Fragment implements LoaderManager.LoaderCa
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
 
-        if (getArguments() != null) {
-            String tableName = getArguments().getString(Settings.KEY_TABLE);
-            boolean distinct = getArguments().getBoolean(Settings.KEY_DISTINCT);
-            String[] columns = getArguments().getStringArray(Settings.KEY_COLUMNS);
-            String whereClause = getArguments().getString(Settings.KEY_WHERECLAUSE);
-            String[] selectionArgs = getArguments().getStringArray(Settings.KEY_WHERECLAUSEARGS);
-            String groupBy = getArguments().getString(Settings.KEY_GROUPBY);
-            String havingClause = getArguments().getString(Settings.KEY_HAVINGCLUASE);
-            String sortOrder = getArguments().getString(Settings.KEY_SORTORDER);
-            String limit = getArguments().getString(Settings.KEY_LIMIT);
+        if (bundle != null) {
+            String tableName = bundle.getString(Settings.KEY_TABLE);
+            boolean distinct = bundle.getBoolean(Settings.KEY_DISTINCT);
+            String[] columns = bundle.getStringArray(Settings.KEY_COLUMNS);
+            String whereClause = bundle.getString(Settings.KEY_WHERECLAUSE);
+            String[] selectionArgs = bundle.getStringArray(Settings.KEY_WHERECLAUSEARGS);
+            String groupBy = bundle.getString(Settings.KEY_GROUPBY);
+            String havingClause = bundle.getString(Settings.KEY_HAVINGCLUASE);
+            String sortOrder = bundle.getString(Settings.KEY_SORTORDER);
+            String limit = bundle.getString(Settings.KEY_LIMIT);
 
             return new SQLiteLoader(getActivity(), distinct, tableName, columns, whereClause, selectionArgs, groupBy, havingClause, sortOrder, limit);
         }
