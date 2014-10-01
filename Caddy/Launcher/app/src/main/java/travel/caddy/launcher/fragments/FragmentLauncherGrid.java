@@ -93,11 +93,27 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
     @Override
     public void onActivityCreated (Bundle savedInstanceState){
 
+        // The desired columns to be bound
+        String[] fromDBColumns = new String[] {
+                Cities.COLUMN_CITYID,
+                Cities.COLUMN_CITYNAME,
+                Cities.COLUMN_NORMALIZEDCOUNTRY,
+                Cities.COLUMN_CONTINENT
+        };
+
+        // the XML defined views which the data will be bound to
+        int[] toViewFields = new int[] {
+                R.id.cityId,
+                R.id.name,
+                R.id.country,
+                R.id.continent,
+        };
+
         // Create an empty adapter we will use to display the loaded data.
         _adapter = new SimpleCursorAdapter(getActivity(),
-                android.R.layout.simple_list_item_2, null,
-                new String[] { ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.CONTACT_STATUS },
-                new int[] { android.R.id.text1, android.R.id.text2 }, 0);
+                R.layout.city_info, null,
+                fromDBColumns,
+                toViewFields, 0);
         setListAdapter(_adapter);
 
         // Start out with a progress indicator.
