@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import travel.caddy.launcher.fragments.FragmentLauncher;
+import travel.caddy.launcher.fragments.FragmentLauncherGrid;
 
-public class ActivityLauncher extends Activity{
+public class ActivityLauncher extends Activity implements FragmentLauncherGrid.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class ActivityLauncher extends Activity{
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new FragmentLauncher())
+                    .add(R.id.container, new FragmentLauncherGrid())
                     .commit();
         }
     }
@@ -46,12 +47,10 @@ public class ActivityLauncher extends Activity{
         return super.onOptionsItemSelected(item);
     }
 
-/*
     @Override
     public void onFragmentInteraction(String id) {
         Toast toast = Toast.makeText(this, "Wheeee!", Toast.LENGTH_SHORT);
         toast.show();
     }
-*/
 
 }

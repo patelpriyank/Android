@@ -92,6 +92,7 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
     * */
     @Override
     public void onActivityCreated (Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
 
         // The desired columns to be bound
         String[] fromDBColumns = new String[] {
