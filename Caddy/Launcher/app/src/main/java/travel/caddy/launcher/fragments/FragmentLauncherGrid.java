@@ -6,10 +6,12 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 import travel.caddy.launcher.Helpers.Settings;
 import travel.caddy.launcher.R;
@@ -29,6 +31,8 @@ import travel.caddy.launcher.fragments.dummy.DummyContent;
 public class FragmentLauncherGrid extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int LOADER_ID_FOR_LAUNCHER_GRID_DATA = 0;
+    // This is the Adapter being used to display the list's data.
+    SimpleCursorAdapter _adapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -49,7 +53,6 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
                 android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));
     }
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -67,7 +70,6 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
         mListener = null;
     }
 
-
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -78,7 +80,6 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
             mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
         }
     }
-
 
     //region "Data Loading through Loaders"
 
@@ -91,6 +92,16 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
     * */
     @Override
     public void onActivityCreated (Bundle savedInstanceState){
+
+        // Create an empty adapter we will use to display the loaded data.
+        _adapter = new SimpleCursorAdapter(getActivity(),
+                android.R.layout.simple_list_item_2, null,
+                new String[] { ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.CONTACT_STATUS },
+                new int[] { android.R.id.text1, android.R.id.text2 }, 0);
+        setListAdapter(_adapter);
+
+        // Start out with a progress indicator.
+        setListShown(false);
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
@@ -141,7 +152,14 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         // Swap the new cursor in.  (The framework will take care of closing the
         // old cursor once we return.)
+        _adapter.swapCursor(cursor);
 
+        // The list should now be shown.
+        if (isResumed()) {
+            setListShown(true);
+        } else {
+            setListShownNoAnimation(true);
+        }
     }
 
     @Override
@@ -149,6 +167,7 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
         // This is called when the last Cursor provided to onLoadFinished()
         // above is about to be closed.  We need to make sure we are no
         // longer using it.
+        _adapter.swapCursor(null);
     }
     //endregion
 
