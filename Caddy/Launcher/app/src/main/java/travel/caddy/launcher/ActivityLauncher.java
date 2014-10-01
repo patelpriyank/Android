@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import travel.caddy.launcher.fragments.FragmentLauncher;
 
-
-public class ActivityLauncher extends Activity implements FragmentLauncher.OnFragmentInteractionListener {
+public class ActivityLauncher extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +46,12 @@ public class ActivityLauncher extends Activity implements FragmentLauncher.OnFra
         return super.onOptionsItemSelected(item);
     }
 
+/*
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(String id) {
         Toast toast = Toast.makeText(this, "Wheeee!", Toast.LENGTH_SHORT);
         toast.show();
     }
+*/
+
 }
