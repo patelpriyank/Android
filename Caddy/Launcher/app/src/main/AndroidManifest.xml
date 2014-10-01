@@ -30,6 +30,7 @@
             android:name=".ActivityWebView"
             android:label="@string/title_activity_web_view" >
         </activity>
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="3356433cbfdd4bab4d4f52b1e675da52b6c4b07c"/>
 
     </application>
 

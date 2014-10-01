@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import travel.caddy.launcher.fragments.FragmentLauncher;
 import travel.caddy.launcher.fragments.FragmentLauncherGrid;
 
@@ -19,6 +20,7 @@ public class ActivityLauncher extends Activity implements FragmentLauncherGrid.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()

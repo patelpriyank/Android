@@ -13,6 +13,8 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import java.util.Objects;
+
 import travel.caddy.launcher.Helpers.Settings;
 import travel.caddy.launcher.R;
 
@@ -47,10 +49,6 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        // TODO: Change Adapter to display your content
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));
     }
 
     @Override
@@ -77,7 +75,9 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+
+            //mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(Objects.toString(id));
         }
     }
 
