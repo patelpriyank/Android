@@ -2,21 +2,23 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center">
 
     <ImageView
-        android:id="@+id/thumbnail"
+        android:id="@+id/icon"
         android:src="@drawable/ic_launcher"
         android:layout_width="72dip"
         android:layout_height="72dip"
         android:scaleType="centerCrop"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="title"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_toRightOf="@+id/icon"
 
         android:textAppearance="@android:style/TextAppearance.Holo.Medium"
         android:layout_marginLeft="?android:attr/listPreferredItemPaddingLeft"/> <!--android:layout_toLeftOf="@+id/icon"-->
@@ -26,9 +28,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="description"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_toRightOf="@+id/icon"
 
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/category"
         android:layout_marginLeft="?android:attr/listPreferredItemPaddingLeft"
         android:textAppearance="@android:style/TextAppearance.Holo.Small"/> <!--android:layout_toLeftOf="@+id/icon"-->
 

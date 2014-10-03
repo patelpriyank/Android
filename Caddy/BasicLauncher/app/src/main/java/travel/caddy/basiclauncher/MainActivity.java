@@ -1,27 +1,17 @@
-package travel.caddy.launcher;
+package travel.caddy.basiclauncher;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
 
-import travel.caddy.launcher.fragments.FragmentLauncherGrid;
-
-public class ActivityLauncher extends Activity implements FragmentLauncherGrid.OnFragmentInteractionListener {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Crashlytics.start(this);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new FragmentLauncherGrid())
-                    .commit();
-        }
     }
 
 
@@ -43,11 +33,4 @@ public class ActivityLauncher extends Activity implements FragmentLauncherGrid.O
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onFragmentInteraction(String id) {
-        Toast toast = Toast.makeText(this, "Wheeee!", Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
 }

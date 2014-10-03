@@ -1,4 +1,4 @@
-package travel.caddy.launcher;
+package travel.caddy.launcher._deleteThis;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import travel.caddy.launcher.Helpers.Settings;
+import travel.caddy.launcher.R;
 
 public class ActivityWebView extends Activity {
 

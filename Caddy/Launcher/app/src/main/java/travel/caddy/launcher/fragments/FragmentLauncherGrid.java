@@ -21,7 +21,6 @@ import travel.caddy.launcher.R;
 import travel.caddy.launcher.adapters.AdapterLauncherGrid;
 import travel.caddy.launcher.datalayer.Loaders.SQLiteLoader;
 import travel.caddy.launcher.datalayer.models.sqlitetables.Cities;
-import travel.caddy.launcher.fragments.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -48,7 +47,6 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -115,6 +113,7 @@ public class FragmentLauncherGrid extends ListFragment implements LoaderManager.
                 R.layout.city_info, null,
                 fromDBColumns,
                 toViewFields, 0);
+
         setListAdapter(_adapter);
 
         // Start out with a progress indicator.

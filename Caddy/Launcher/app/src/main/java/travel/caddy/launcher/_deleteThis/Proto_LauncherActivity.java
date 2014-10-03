@@ -1,4 +1,4 @@
-package travel.caddy.launcher;
+package travel.caddy.launcher._deleteThis;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import travel.caddy.launcher.Helpers.Settings;
+import travel.caddy.launcher.R;
 
 
 public class Proto_LauncherActivity extends Activity {
