@@ -88,7 +88,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="crashlytics-1.1.13" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.2.4" level="project" />
-    <orderEntry type="library" exported="" name="GrouponPOJO" level="project" />
+    <orderEntry type="library" exported="" name="GrouponPOJO-sources" level="project" />
     <orderEntry type="library" exported="" name="jackson-databind-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="jackson-core-2.2.4" level="project" />
   </component>
